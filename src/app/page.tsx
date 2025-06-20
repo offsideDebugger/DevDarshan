@@ -100,7 +100,7 @@ export default function Home() {
               </Button>
               <Button size="lg" variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-800 px-8 py-3 text-lg">
                 <Github className="mr-2 w-5 h-5" />
-                View on GitHub
+               <Link href="https://github.com/offsideDebugger/DevDarshan">View on GitHub</Link>
               </Button>
             </div>
           </div>
