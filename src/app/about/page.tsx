@@ -224,9 +224,6 @@ export default function About() {
             {milestones.map((milestone, index) => (
               <div key={index} className="flex items-start space-x-6">
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-                    <Calendar className="w-6 h-6 text-white" />
-                  </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center space-x-4 mb-2">
