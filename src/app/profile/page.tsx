@@ -1,9 +1,13 @@
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/auth";
 import AppHeader from "@/components/layout/AppHeader";
 
 export default async function ProfilePage() {
     const session = await getServerSession(authOptions);
+    if (!session) {
+        redirect("/login");
+    }
 
     return (
         <div className="min-h-screen bg-black text-white">

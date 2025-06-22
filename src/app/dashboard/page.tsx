@@ -1,10 +1,14 @@
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/auth";
 import AppHeader from "@/components/layout/AppHeader";
 import DashboardClientContent from "@/components/dashboard/DashboardClientContent";
 
 export default async function DashboardPage() {
     const session = await getServerSession(authOptions);
+    if (!session) {
+        redirect("/login");
+    }
 
     return (
         <div className="min-h-screen bg-black text-white">

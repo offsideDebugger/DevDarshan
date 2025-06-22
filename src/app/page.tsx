@@ -203,6 +203,9 @@ export default function Home() {
                 <a href="#" className="hover:text-white transition-colors">Contact</a>
               </div>
             </div>
+            <div className="mt-6 text-xs text-gray-500">
+              Made by <a href="https://twitter.com/offsidedebugger" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">@offsidedebugger</a>
+            </div>
           </div>
         </div>
       </footer>
