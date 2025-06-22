@@ -26,7 +26,7 @@ export default function Signup() {
         setMessage("")
         
         try{
-            const res=await axios.post(`${process.env.NEXTAUTH_URL}/api/auth/signup`,{
+            const res=await axios.post("https://dev-darshan.vercel.app/api/auth/signup",{
                 username,
                 email,
                 password
