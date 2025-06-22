@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email", placeholder: "user@example.com" },
         password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         // Validate input
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Email and password are required');
@@ -65,6 +65,7 @@ export const authOptions: NextAuthOptions = {
   ],
   
   callbacks: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async jwt({ token, user }: { token: any; user?: any }) {
       if (user) {
         token.id = user.id;
@@ -72,6 +73,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async session({ session, token }: { session: any; token: any }) {
       if (token?.id) {
         session.user.id = token.id as string;

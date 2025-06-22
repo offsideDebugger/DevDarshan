@@ -2,12 +2,11 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { AlertCircle, CheckCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 export default function MessageBanner() {
   const searchParams = useSearchParams();
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     // Handle verification error messages
@@ -21,7 +20,7 @@ export default function MessageBanner() {
     }
   }, [searchParams]);
 
-  if (!errorMessage && !successMessage) {
+  if (!errorMessage) {
     return null;
   }
 
@@ -31,12 +30,6 @@ export default function MessageBanner() {
         <div className="bg-red-900/90 border border-red-500 text-red-100 px-4 py-3 rounded-lg mb-4 flex items-center gap-2">
           <AlertCircle className="w-5 h-5 text-red-400" />
           <span className="text-sm">{errorMessage}</span>
-        </div>
-      )}
-      {successMessage && (
-        <div className="bg-green-900/90 border border-green-500 text-green-100 px-4 py-3 rounded-lg mb-4 flex items-center gap-2">
-          <CheckCircle className="w-5 h-5 text-green-400" />
-          <span className="text-sm">{successMessage}</span>
         </div>
       )}
     </div>

@@ -7,7 +7,6 @@ import {
   Bookmark, 
   LogOut, 
   User, 
-  Settings,
   ChevronDown,
   CheckCircle
 } from "lucide-react";
@@ -18,7 +17,7 @@ export default function AvatarDropdown() {
   const [showLogoutMessage, setShowLogoutMessage] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   
   const initials = session?.user?.name?.split(" ")[0][0] || "";
   const userName = session?.user?.name || "User";

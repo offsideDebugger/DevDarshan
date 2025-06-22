@@ -21,7 +21,7 @@ export default async function BookmarksPage() {
                             <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                                 Your Bookmarks
                             </h1>
-                            <p className="text-gray-400 mt-2 text-sm lg:text-base">Organizations you've saved for later</p>
+                            <p className="text-gray-400 mt-2 text-sm lg:text-base">Organizations you&apos;ve saved for later</p>
                         </div>
                     </div>
 

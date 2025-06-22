@@ -11,7 +11,7 @@ export default function BookmarksClientContent() {
             <div className="bg-gray-900/50 border border-gray-700 rounded-xl p-8 lg:p-12 text-center">
                 <Bookmark className="w-12 h-12 lg:w-16 lg:h-16 text-gray-600 mx-auto mb-4" />
                 <h3 className="text-lg lg:text-xl font-semibold text-white mb-2">No bookmarks yet</h3>
-                <p className="text-gray-400 mb-6 text-sm lg:text-base">Start exploring organizations and bookmark the ones you're interested in</p>
+                <p className="text-gray-400 mb-6 text-sm lg:text-base">Start exploring organizations and bookmark the ones you&apos;re interested in</p>
                 <a 
                     href="/dashboard" 
                     className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"

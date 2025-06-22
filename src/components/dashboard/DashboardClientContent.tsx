@@ -8,23 +8,7 @@ import { useState, useMemo } from "react";
 export default function DashboardClientContent() {
     const { bookmarkedOrgs, toggleBookmark, isBookmarked } = useBookmarks();
     const organizations = gsocOrganizations;
-    const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
     const [techSearch, setTechSearch] = useState("");
-
-    // Get all unique techs from orgs
-    const allTechs = useMemo(() => {
-        const techSet = new Set<string>();
-        organizations.forEach(org => org.techStack.forEach(tech => techSet.add(tech)));
-        return Array.from(techSet).sort();
-    }, [organizations]);
-
-    // Filter orgs by selected techs
-    const filteredOrgs = useMemo(() => {
-        if (selectedTechs.length === 0) return organizations;
-        return organizations.filter(org =>
-            org.techStack.some(tech => selectedTechs.includes(tech))
-        );
-    }, [organizations, selectedTechs]);
 
     // Filter orgs by tech stack search
     const filteredOrgsBySearch = useMemo(() => {
@@ -34,12 +18,6 @@ export default function DashboardClientContent() {
             org.techStack.some(tech => tech.toLowerCase().includes(search))
         );
     }, [organizations, techSearch]);
-
-    // Handle select change
-    function handleTechChange(e: React.ChangeEvent<HTMLSelectElement>) {
-        const options = Array.from(e.target.selectedOptions).map(opt => opt.value);
-        setSelectedTechs(options);
-    }
 
     // Helper to parse openIssues string like '1,200+' to a number
     function parseOpenIssues(openIssues: string): number {
@@ -95,7 +73,7 @@ export default function DashboardClientContent() {
             <div className="bg-gray-900/50 border border-gray-700 rounded-xl overflow-hidden">
                 <div className="p-4 lg:p-6 border-b border-gray-700">
                     <h2 className="text-xl lg:text-2xl font-bold text-white">GSoC Organizations</h2>
-                    <p className="text-gray-400 mt-1 text-sm lg:text-base">Browse and bookmark organizations you're interested in</p>
+                    <p className="text-gray-400 mt-1 text-sm lg:text-base">Browse and bookmark organizations you&apos;re interested in</p>
                 </div>
                 
                 {/* Desktop Table */}

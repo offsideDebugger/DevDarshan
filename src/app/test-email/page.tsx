@@ -30,13 +30,19 @@ export default function TestEmailPage() {
             setStatus('success')
             setMessage("Test email sent successfully!")
             setTestResult(res.data)
-        } catch (error) {
+        } catch (error: unknown) {
             console.log(error)
             setStatus('error')
-            if ((error as any).response?.data?.error) {
-                setMessage((error as any).response.data.error)
-            } else if ((error as any).message) {
-                setMessage((error as any).message)
+            if (
+                typeof error === 'object' &&
+                error !== null &&
+                'response' in error &&
+                typeof (error as { response?: { data?: { error?: string } } }).response === 'object' &&
+                (error as { response?: { data?: { error?: string } } }).response?.data?.error
+            ) {
+                setMessage((error as { response: { data: { error: string } } }).response.data.error)
+            } else if (error instanceof Error && error.message) {
+                setMessage(error.message)
             } else {
                 setMessage("Failed to send test email")
             }
@@ -64,13 +70,19 @@ export default function TestEmailPage() {
             setStatus('success')
             setMessage("Account verified successfully!")
             setTestResult(res.data)
-        } catch (error) {
+        } catch (error: unknown) {
             console.log(error)
             setStatus('error')
-            if ((error as any).response?.data?.error) {
-                setMessage((error as any).response.data.error)
-            } else if ((error as any).message) {
-                setMessage((error as any).message)
+            if (
+                typeof error === 'object' &&
+                error !== null &&
+                'response' in error &&
+                typeof (error as { response?: { data?: { error?: string } } }).response === 'object' &&
+                (error as { response?: { data?: { error?: string } } }).response?.data?.error
+            ) {
+                setMessage((error as { response: { data: { error: string } } }).response.data.error)
+            } else if (error instanceof Error && error.message) {
+                setMessage(error.message)
             } else {
                 setMessage("Failed to verify account")
             }

@@ -6,7 +6,7 @@ import Link from "next/link"
 import { BackgroundGradient } from "@/components/cardGradient"
 import { Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 
-export default function (){
+export default function Signup() {
     const [username,setUsername]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
@@ -41,12 +41,10 @@ export default function (){
                 setStatus('success')
                 setMessage(res.data.message || "Registration successful!")
             }
-        }catch(e: any){
+        }catch(e: unknown){
             console.log(e)
             setStatus('error')
-            if (e.response?.data?.error) {
-                setMessage(e.response.data.error)
-            } else if (e.message) {
+            if (e instanceof Error && e.message) {
                 setMessage(e.message)
             } else {
                 setMessage("Registration failed. Please try again.")
@@ -101,7 +99,7 @@ export default function (){
                     
                     {status === 'email-sent' && (
                         <div className="mt-3 text-xs text-gray-400">
-                            <p>📧 Check your spam folder if you don't see the email</p>
+                            <p>📧 Check your spam folder if you don&apos;t see the email</p>
                             <p>⏰ Verification link expires in 1 hour</p>
                         </div>
                     )}
