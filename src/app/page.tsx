@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import MessageBanner from '@/components/MessageBanner';
 import MainPageNav from '@/components/MainPageNav';
+import { Suspense } from 'react';
 
 import { 
   Code2, 
@@ -68,10 +69,14 @@ export default function Home() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(59,130,246,0.05),transparent)] pointer-events-none" />
       
       {/* Error/Success Messages */}
-      <MessageBanner />
+      <Suspense fallback={null}>
+        <MessageBanner />
+      </Suspense>
       
       {/* Navigation */}
-      <MainPageNav />
+      <Suspense fallback={null}>
+        <MainPageNav />
+      </Suspense>
 
       {/* Hero Section */}
       <section className="relative py-12 lg:py-32">
