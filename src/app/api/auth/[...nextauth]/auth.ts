@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({

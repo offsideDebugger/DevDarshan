@@ -1,1 +1,4 @@
-src/generated/ 
+# Ignore all generated Prisma files and subdirectories
+src/generated/
+src/generated/prisma/
+src/generated/prisma/runtime/ 
