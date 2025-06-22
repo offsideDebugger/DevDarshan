@@ -2,6 +2,7 @@ import { prisma } from "@/db/db";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
+import { randomBytes } from "crypto";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -31,6 +32,11 @@ export const authOptions: NextAuthOptions = {
             throw new Error('No user found with this email');
           }
 
+          // ✅ CHECK IF EMAIL IS VERIFIED
+          if (!user.isVerified) {
+            throw new Error('Please verify your email before logging in. Check your inbox for verification link.');
+          }
+
           // Verify password
           const isValidPassword = await bcrypt.compare(
             credentials.password,
@@ -45,8 +51,8 @@ export const authOptions: NextAuthOptions = {
           return {
             id: user.id,
             email: user.email,
-            name: user.username// assuming you have a name or username field
-            // Add other user properties you want to include
+            name: user.username,
+            isVerified: user.isVerified
           };
 
         } catch (error) {
@@ -59,37 +65,44 @@ export const authOptions: NextAuthOptions = {
   ],
   
   callbacks: {
-    async jwt({ token,user }:any){
-          if(user){
-            token.id=user.id;
-          }
-          return token;
-        },
-        async session({ session,token }:any){
-          if(token?.id){
-            session.user.id=token.id as string;
-          }
-          return session;
-        },
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.id = user.id;
+        token.isVerified = user.isVerified;
+      }
+      return token;
+    },
+    async session({ session, token }: any) {
+      if (token?.id) {
+        session.user.id = token.id as string;
+        session.user.isVerified = token.isVerified;
+      }
+      return session;
+    },
     
-    // Fixed redirect callback - should return absolute URLs
     async redirect({ url, baseUrl }) {
       // Always redirect to dashboard after successful sign in
       return `${baseUrl}/dashboard`;
     }
   },
   
+  events: {
+    async signOut({ token, session }) {
+      // Clear any server-side session data if needed
+      console.log('User signed out:', token?.email);
+    },
+  },
+  
   pages: {
     signIn: "/login",
-    error: "/login", // Optional: redirect errors to login page
+    error: "/login", // Redirect errors to login page
+    signOut: "/", // Redirect to home page after signout
   },
   
   session: {
     strategy: "jwt",
+    maxAge: 24 * 60 * 60, // 24 hours
   },
   
   secret: process.env.NEXTAUTH_SECRET,
 };
-
-// For App Router - add this export
-// export default NextAuth(authOptions);
