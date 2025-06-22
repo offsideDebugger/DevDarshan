@@ -26,7 +26,7 @@ export default function Signup() {
         setMessage("")
         
         try{
-            const res=await axios.post("http://localhost:3000/api/auth/signup",{
+            const res=await axios.post(`${process.env.NEXTAUTH_URL}/api/auth/signup`,{
                 username,
                 email,
                 password
