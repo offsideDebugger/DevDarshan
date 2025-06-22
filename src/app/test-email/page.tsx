@@ -9,7 +9,7 @@ export default function TestEmailPage() {
     const [isLoading, setIsLoading] = useState(false)
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
     const [message, setMessage] = useState("")
-    const [testResult, setTestResult] = useState<any>(null)
+    const [testResult, setTestResult] = useState<string | null>(null)
 
     const testEmail = async () => {
         if (!email) {
@@ -30,13 +30,13 @@ export default function TestEmailPage() {
             setStatus('success')
             setMessage("Test email sent successfully!")
             setTestResult(res.data)
-        } catch (e: any) {
-            console.log(e)
+        } catch (error) {
+            console.log(error)
             setStatus('error')
-            if (e.response?.data?.error) {
-                setMessage(e.response.data.error)
-            } else if (e.message) {
-                setMessage(e.message)
+            if ((error as any).response?.data?.error) {
+                setMessage((error as any).response.data.error)
+            } else if ((error as any).message) {
+                setMessage((error as any).message)
             } else {
                 setMessage("Failed to send test email")
             }
@@ -64,13 +64,13 @@ export default function TestEmailPage() {
             setStatus('success')
             setMessage("Account verified successfully!")
             setTestResult(res.data)
-        } catch (e: any) {
-            console.log(e)
+        } catch (error) {
+            console.log(error)
             setStatus('error')
-            if (e.response?.data?.error) {
-                setMessage(e.response.data.error)
-            } else if (e.message) {
-                setMessage(e.message)
+            if ((error as any).response?.data?.error) {
+                setMessage((error as any).response.data.error)
+            } else if ((error as any).message) {
+                setMessage((error as any).message)
             } else {
                 setMessage("Failed to verify account")
             }
@@ -93,7 +93,7 @@ export default function TestEmailPage() {
                     <input
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.currentTarget.value)}
                         placeholder="test@example.com"
                         className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />

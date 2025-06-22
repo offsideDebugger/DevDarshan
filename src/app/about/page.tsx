@@ -6,17 +6,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { 
   Code2, 
-  BookmarkPlus, 
   GitBranch, 
   Users, 
-  Target, 
   ArrowRight,
   Github,
   Heart,
   Lightbulb,
   Rocket,
   Globe,
-  Calendar,
   Award
 } from 'lucide-react';
 import Link from 'next/link';
@@ -113,7 +110,7 @@ export default function About() {
             
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               DevDarshan was born from the belief that every developer deserves a clear path to contribute to open source. 
-              We're here to guide you through your Google Summer of Code journey.
+              We&apos;re here to guide you through your Google Summer of Code journey.
             </p>
           </div>
         </div>
@@ -251,7 +248,7 @@ export default function About() {
                 </span>
               </h2>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Be part of the community that's making open source more accessible for everyone.
+                Be part of the community that&apos;s making open source more accessible for everyone.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/">

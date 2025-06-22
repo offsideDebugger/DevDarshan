@@ -2,8 +2,8 @@ import { prisma } from "@/db/db";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { NextAuthOptions } from "next-auth";
-import { randomBytes } from "crypto";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -65,14 +65,14 @@ export const authOptions: NextAuthOptions = {
   ],
   
   callbacks: {
-    async jwt({ token, user }: any) {
+    async jwt({ token, user }: { token: any; user?: any }) {
       if (user) {
         token.id = user.id;
         token.isVerified = user.isVerified;
       }
       return token;
     },
-    async session({ session, token }: any) {
+    async session({ session, token }: { session: any; token: any }) {
       if (token?.id) {
         session.user.id = token.id as string;
         session.user.isVerified = token.isVerified;
@@ -80,16 +80,16 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }: { baseUrl: string }) {
       // Always redirect to dashboard after successful sign in
       return `${baseUrl}/dashboard`;
     }
   },
   
   events: {
-    async signOut({ token, session }) {
+    async signOut() {
       // Clear any server-side session data if needed
-      console.log('User signed out:', token?.email);
+      // No-op for now
     },
   },
   
